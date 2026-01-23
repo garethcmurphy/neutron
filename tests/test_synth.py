@@ -64,8 +64,8 @@ class TestGenerateSyntheticTofRuns:
     def test_tof_bins_range(self):
         """Test that TOF bins span the expected range."""
         _, _, tof = generate_synthetic_tof_runs()
-        assert tof[0] == pytest.approx(0.0)
-        assert tof[-1] == pytest.approx(1.0)
+        assert tof[0] == 0.0
+        assert tof[-1] == 1.0
         assert np.all(np.diff(tof) > 0)  # Monotonically increasing
 
     def test_reproducibility(self):

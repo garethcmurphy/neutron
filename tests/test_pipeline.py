@@ -116,7 +116,7 @@ class TestRunPipeline:
                     results1['pca_variance'],
                     results2['pca_variance'],
                     rtol=0.02,  # 2% relative tolerance
-                    atol=0.001   # 0.1% absolute tolerance
+                    atol=0.001  # 0.001 absolute tolerance
                 )
 
     def test_different_cluster_counts(self):

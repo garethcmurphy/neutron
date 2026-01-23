@@ -39,9 +39,6 @@ dev = [
     "ruff>=0.1.0",
 ]
 
-[project.scripts]
-neutron-explorer = "neutron_explorer.pipeline:run_pipeline"
-
 [tool.setuptools]
 package-dir = {"" = "src"}
 

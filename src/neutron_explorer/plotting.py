@@ -54,7 +54,10 @@ def save_pca(
         >>> labels = KMeans(n_clusters=3).fit_predict(Z)
         >>> save_pca(Z, labels, "output.png", "PCA Results")
     """
-    ensure_dir(os.path.dirname(path))
+    # Ensure parent directory exists if path contains directory components
+    dir_path = os.path.dirname(path)
+    if dir_path:
+        ensure_dir(dir_path)
     
     if figsize is not None:
         plt.figure(figsize=figsize)
