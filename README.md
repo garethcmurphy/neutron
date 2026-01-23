@@ -1,6 +1,6 @@
 # Neutron Run Explorer (Synthetic TOF)
 
-A public, non-pharmaceutical machine learning demonstration using synthetic neutron time-of-flight (TOF) data. This project showcases data analysis techniques including Principal Component Analysis (PCA), k-means clustering, and detector correlations for neutron scattering experiments.
+A public, machine learning demonstration using synthetic neutron time-of-flight (TOF) data. This project showcases data analysis techniques including Principal Component Analysis (PCA), k-means clustering, and detector correlations for neutron scattering experiments.
 
 ## Overview
 
