@@ -2,7 +2,6 @@
 
 import numpy as np
 import pandas as pd
-import pytest
 
 from neutron_explorer.synth import generate_synthetic_tof_runs
 
