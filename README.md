@@ -2,11 +2,12 @@
 
 A public, machine learning demonstration using synthetic neutron time-of-flight (TOF) data. This project showcases data analysis techniques including Principal Component Analysis (PCA), k-means clustering, and detector correlations for neutron scattering experiments.
 
-![](pca_kmeans.png)
+![pca](pca_kmeans.png)
 
 ## Overview
 
 The Neutron Run Explorer generates synthetic neutron detector data that mimics real time-of-flight neutron scattering experiments. It demonstrates how machine learning techniques can be applied to:
+
 - Identify patterns in neutron detector readings
 - Cluster similar experimental runs
 - Visualize high-dimensional detector data
@@ -66,6 +67,7 @@ python run_pipeline.py
 ```
 
 This will:
+
 1. Generate 400 synthetic neutron runs with 24 detectors each
 2. Apply PCA to reduce dimensionality
 3. Perform k-means clustering to identify 3 distinct groups
@@ -112,7 +114,7 @@ save_pca(Z[:, :2], km.labels_, "output.png", "My Analysis")
 
 ## Project Structure
 
-```
+```bash
 neutron/
 ├── README.md                          # This file
 ├── requirements.txt                   # Python dependencies

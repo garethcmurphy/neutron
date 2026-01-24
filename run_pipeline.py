@@ -9,6 +9,6 @@ from neutron_explorer.pipeline import run_pipeline
 
 if __name__ == "__main__":
     results = run_pipeline()
-    print(f"Pipeline completed successfully!")
+    print("Pipeline completed successfully!")
     print(f"Silhouette score: {results['silhouette']:.3f}")
-    print(f"Results saved to 'outputs/' directory")
+    print("Results saved to 'outputs/' directory")
