@@ -2,6 +2,8 @@
 
 A public, machine learning demonstration using synthetic neutron time-of-flight (TOF) data. This project showcases data analysis techniques including Principal Component Analysis (PCA), k-means clustering, and detector correlations for neutron scattering experiments.
 
+![](pca_kmeans.png)
+
 ## Overview
 
 The Neutron Run Explorer generates synthetic neutron detector data that mimics real time-of-flight neutron scattering experiments. It demonstrates how machine learning techniques can be applied to:
