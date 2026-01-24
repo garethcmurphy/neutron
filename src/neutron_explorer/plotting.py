@@ -23,7 +23,7 @@ def ensure_dir(path: str) -> None:
 
 
 def save_pca(
-    Z: np.ndarray,
+    z: np.ndarray,
     labels: np.ndarray,
     path: str,
     title: str,
@@ -64,7 +64,7 @@ def save_pca(
     else:
         plt.figure()
 
-    plt.scatter(Z[:, 0], Z[:, 1], c=labels, s=18, cmap="viridis")
+    plt.scatter(z[:, 0], z[:, 1], c=labels, s=18, cmap="viridis")
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)

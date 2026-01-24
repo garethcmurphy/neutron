@@ -40,7 +40,7 @@ def generate_synthetic_tof_runs(
     tof = np.linspace(0, 1.0, n_bins)
     true_labels = rng.integers(0, 3, size=n_runs)
     det_scale = rng.lognormal(0, 0.2, size=n_detectors)
-    X = np.zeros((n_runs, n_detectors, n_bins))
+    x = np.zeros((n_runs, n_detectors, n_bins))
 
     def gaussian_peak(x: np.ndarray, mu: float, sigma: float) -> np.ndarray:
         """Generate a Gaussian peak centered at mu with width sigma."""
@@ -63,11 +63,11 @@ def generate_synthetic_tof_runs(
                 amplitude * gaussian_peak(tof, mu, sigma) for mu, sigma, amplitude in peaks
             )
             noise = rng.normal(0, 0.03, size=n_bins)
-            X[i, d] = beam * det_scale[d] * (signal + background) + noise
+            x[i, d] = beam * det_scale[d] * (signal + background) + noise
 
     # Ensure all values are non-negative (physical constraint)
-    X = np.clip(X, 0, None)
-    X_flat = X.reshape(n_runs, -1)
+    x = np.clip(x, 0, None)
+    x_flat = x.reshape(n_runs, -1)
 
     runs_df = pd.DataFrame(
         {
@@ -77,4 +77,4 @@ def generate_synthetic_tof_runs(
             "n_bins": n_bins,
         }
     )
-    return runs_df, X_flat, tof
+    return runs_df, x_flat, tof

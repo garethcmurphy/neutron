@@ -58,28 +58,28 @@ def run_pipeline(
     os.makedirs(outdir, exist_ok=True)
 
     # Generate synthetic data
-    runs, X, _ = generate_synthetic_tof_runs(
+    runs, x, _ = generate_synthetic_tof_runs(
         n_runs=n_runs, n_detectors=n_detectors, n_bins=n_bins, random_state=random_state
     )
 
     # Standardize features
     scaler = StandardScaler()
-    Xs = scaler.fit_transform(X)
+    x_s = scaler.fit_transform(x)
 
     # Apply PCA
     pca = PCA(n_components=n_components)
-    Z = pca.fit_transform(Xs)
+    z = pca.fit_transform(x_s)
 
     # Perform k-means clustering
     km = KMeans(n_clusters=n_clusters, n_init=10, random_state=random_state)
-    km.fit(Z)
+    km.fit(z)
 
     # Calculate clustering quality metric
-    silhouette = silhouette_score(Z, km.labels_)
+    silhouette = silhouette_score(z, km.labels_)
 
     # Save PCA visualization
     save_pca(
-        Z[:, :2], km.labels_, os.path.join(outdir, "pca_kmeans.png"), "PCA + k-means Clustering"
+        z[:, :2], km.labels_, os.path.join(outdir, "pca_kmeans.png"), "PCA + k-means Clustering"
     )
 
     # Save cluster assignments

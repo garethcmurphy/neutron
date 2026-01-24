@@ -44,11 +44,11 @@ class TestSavePca:
         """Test basic PCA plot creation."""
         with tempfile.TemporaryDirectory() as tmpdir:
             # Create sample data
-            Z = np.random.randn(100, 2)
+            z = np.random.randn(100, 2)
             labels = np.random.randint(0, 3, size=100)
             output_path = os.path.join(tmpdir, "test_plot.png")
 
-            save_pca(Z, labels, output_path, "Test Plot")
+            save_pca(z, labels, output_path, "Test Plot")
 
             # Check file was created
             assert os.path.exists(output_path)
@@ -57,23 +57,23 @@ class TestSavePca:
     def test_plot_with_subdirectory(self):
         """Test that subdirectories are created automatically."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(50, 2)
+            z = np.random.randn(50, 2)
             labels = np.random.randint(0, 2, size=50)
             output_path = os.path.join(tmpdir, "subdir", "test_plot.png")
 
-            save_pca(Z, labels, output_path, "Test")
+            save_pca(z, labels, output_path, "Test")
 
             assert os.path.exists(output_path)
 
     def test_custom_labels(self):
         """Test plot with custom axis labels."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(30, 2)
+            z = np.random.randn(30, 2)
             labels = np.array([0, 1, 2] * 10)
             output_path = os.path.join(tmpdir, "custom_labels.png")
 
             save_pca(
-                Z, labels, output_path, "Custom Test", xlabel="Component 1", ylabel="Component 2"
+                z, labels, output_path, "Custom Test", xlabel="Component 1", ylabel="Component 2"
             )
 
             assert os.path.exists(output_path)
@@ -81,13 +81,13 @@ class TestSavePca:
     def test_custom_dpi(self):
         """Test plot with custom DPI setting."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(50, 2)
+            z = np.random.randn(50, 2)
             labels = np.random.randint(0, 3, size=50)
             path_low = os.path.join(tmpdir, "low_dpi.png")
             path_high = os.path.join(tmpdir, "high_dpi.png")
 
-            save_pca(Z, labels, path_low, "Low DPI", dpi=50)
-            save_pca(Z, labels, path_high, "High DPI", dpi=300)
+            save_pca(z, labels, path_low, "Low DPI", dpi=50)
+            save_pca(z, labels, path_high, "High DPI", dpi=300)
 
             # Higher DPI should produce larger file
             assert os.path.getsize(path_high) > os.path.getsize(path_low)
@@ -95,30 +95,30 @@ class TestSavePca:
     def test_custom_figsize(self):
         """Test plot with custom figure size."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(50, 2)
+            z = np.random.randn(50, 2)
             labels = np.random.randint(0, 3, size=50)
             output_path = os.path.join(tmpdir, "custom_size.png")
 
-            save_pca(Z, labels, output_path, "Custom Size", figsize=(10, 8))
+            save_pca(z, labels, output_path, "Custom Size", figsize=(10, 8))
 
             assert os.path.exists(output_path)
 
     def test_different_cluster_counts(self):
         """Test plots with different numbers of clusters."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(100, 2)
+            z = np.random.randn(100, 2)
 
             for n_clusters in [2, 3, 5, 10]:
                 labels = np.random.randint(0, n_clusters, size=100)
                 output_path = os.path.join(tmpdir, f"clusters_{n_clusters}.png")
 
-                save_pca(Z, labels, output_path, f"{n_clusters} Clusters")
+                save_pca(z, labels, output_path, f"{n_clusters} Clusters")
                 assert os.path.exists(output_path)
 
     def test_no_matplotlib_warning(self):
         """Test that plotting doesn't leave figures open."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(50, 2)
+            z = np.random.randn(50, 2)
             labels = np.random.randint(0, 3, size=50)
 
             # Get initial figure count
@@ -126,7 +126,7 @@ class TestSavePca:
 
             for i in range(5):
                 output_path = os.path.join(tmpdir, f"plot_{i}.png")
-                save_pca(Z, labels, output_path, f"Plot {i}")
+                save_pca(z, labels, output_path, f"Plot {i}")
 
             # Should not accumulate figures
             final_figs = len(plt.get_fignums())
@@ -135,22 +135,22 @@ class TestSavePca:
     def test_large_dataset(self):
         """Test with a larger dataset."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(1000, 2)
+            z = np.random.randn(1000, 2)
             labels = np.random.randint(0, 5, size=1000)
             output_path = os.path.join(tmpdir, "large_data.png")
 
-            save_pca(Z, labels, output_path, "Large Dataset")
+            save_pca(z, labels, output_path, "Large Dataset")
             assert os.path.exists(output_path)
 
     def test_data_with_outliers(self):
         """Test plotting data with extreme values."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            Z = np.random.randn(100, 2)
+            z = np.random.randn(100, 2)
             # Add some outliers
-            Z[0] = [100, 100]
-            Z[1] = [-100, -100]
+            z[0] = [100, 100]
+            z[1] = [-100, -100]
             labels = np.random.randint(0, 3, size=100)
             output_path = os.path.join(tmpdir, "outliers.png")
 
-            save_pca(Z, labels, output_path, "With Outliers")
+            save_pca(z, labels, output_path, "With Outliers")
             assert os.path.exists(output_path)

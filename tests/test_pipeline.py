@@ -105,7 +105,8 @@ class TestRunPipeline:
                 pd.testing.assert_frame_equal(results1["runs"], results2["runs"])
 
                 # Check PCA variance is very similar (allowing for numerical precision differences)
-                # Using looser tolerance as different environments may have slight numerical variations
+                # Using looser tolerance as different environments may
+                # have slight numerical variations
                 np.testing.assert_allclose(
                     results1["pca_variance"],
                     results2["pca_variance"],
