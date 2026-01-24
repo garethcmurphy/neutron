@@ -10,30 +10,27 @@ import pandas as pd
 
 
 def generate_synthetic_tof_runs(
-    n_runs: int = 400,
-    n_detectors: int = 24,
-    n_bins: int = 300,
-    random_state: int = 7
+    n_runs: int = 400, n_detectors: int = 24, n_bins: int = 300, random_state: int = 7
 ) -> tuple[pd.DataFrame, np.ndarray, np.ndarray]:
     """
     Generate synthetic neutron time-of-flight run data.
-    
+
     Creates synthetic data for neutron scattering experiments with multiple runs,
     detectors, and time bins. Each run belongs to one of three clusters with
     distinct peak patterns.
-    
+
     Args:
         n_runs: Number of experimental runs to generate (default: 400)
         n_detectors: Number of detectors per run (default: 24)
         n_bins: Number of time bins for TOF measurement (default: 300)
         random_state: Random seed for reproducibility (default: 7)
-    
+
     Returns:
         tuple containing:
             - runs_df: DataFrame with run metadata (run_id, true_label, etc.)
             - X_flat: Flattened detector data array of shape (n_runs, n_detectors * n_bins)
             - tof: Time-of-flight bin centers array
-    
+
     Example:
         >>> runs, X, tof = generate_synthetic_tof_runs(n_runs=100, n_detectors=12)
         >>> print(runs.shape, X.shape, tof.shape)
@@ -57,13 +54,14 @@ def generate_synthetic_tof_runs(
             peaks = [(0.30, 0.030, 0.9), (0.70, 0.030, 0.8)]
         else:
             peaks = [(0.22, 0.020, 0.7), (0.55, 0.040, 1.1)]
-        
+
         background = 0.08 + 0.05 * rng.random()
         beam = rng.lognormal(0, 0.25)
 
         for d in range(n_detectors):
-            signal = sum(amplitude * gaussian_peak(tof, mu, sigma) 
-                        for mu, sigma, amplitude in peaks)
+            signal = sum(
+                amplitude * gaussian_peak(tof, mu, sigma) for mu, sigma, amplitude in peaks
+            )
             noise = rng.normal(0, 0.03, size=n_bins)
             X[i, d] = beam * det_scale[d] * (signal + background) + noise
 
@@ -71,10 +69,12 @@ def generate_synthetic_tof_runs(
     X = np.clip(X, 0, None)
     X_flat = X.reshape(n_runs, -1)
 
-    runs_df = pd.DataFrame({
-        "run_id": [f"run_{i:04d}" for i in range(n_runs)],
-        "true_label": true_labels,
-        "n_detectors": n_detectors,
-        "n_bins": n_bins,
-    })
+    runs_df = pd.DataFrame(
+        {
+            "run_id": [f"run_{i:04d}" for i in range(n_runs)],
+            "true_label": true_labels,
+            "n_detectors": n_detectors,
+            "n_bins": n_bins,
+        }
+    )
     return runs_df, X_flat, tof

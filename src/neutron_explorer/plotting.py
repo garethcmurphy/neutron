@@ -15,7 +15,7 @@ import numpy as np
 def ensure_dir(path: str) -> None:
     """
     Ensure that a directory exists, creating it if necessary.
-    
+
     Args:
         path: Path to the directory to create
     """
@@ -30,11 +30,11 @@ def save_pca(
     xlabel: str = "PC1",
     ylabel: str = "PC2",
     dpi: int = 150,
-    figsize: Optional[tuple[float, float]] = None
+    figsize: Optional[tuple[float, float]] = None,
 ) -> None:
     """
     Create and save a scatter plot of PCA results with cluster labels.
-    
+
     Args:
         Z: PCA-transformed data array of shape (n_samples, n_components).
             Only the first two components are plotted.
@@ -45,7 +45,7 @@ def save_pca(
         ylabel: Label for y-axis (default: "PC2")
         dpi: Resolution of the saved figure (default: 150)
         figsize: Figure size as (width, height) in inches (default: None, uses matplotlib default)
-    
+
     Example:
         >>> from sklearn.decomposition import PCA
         >>> from sklearn.cluster import KMeans
@@ -58,17 +58,17 @@ def save_pca(
     dir_path = os.path.dirname(path)
     if dir_path:
         ensure_dir(dir_path)
-    
+
     if figsize is not None:
         plt.figure(figsize=figsize)
     else:
         plt.figure()
-    
-    plt.scatter(Z[:, 0], Z[:, 1], c=labels, s=18, cmap='viridis')
+
+    plt.scatter(Z[:, 0], Z[:, 1], c=labels, s=18, cmap="viridis")
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.colorbar(label='Cluster')
+    plt.colorbar(label="Cluster")
     plt.tight_layout()
     plt.savefig(path, dpi=dpi)
     plt.close()
