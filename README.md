@@ -155,8 +155,8 @@ neutron/
 ### Running Tests
 
 ```bash
-# Install test dependencies
-pip install pytest pytest-cov
+# Install project + development dependencies
+pip install -e ".[dev]"
 
 # Run all tests
 pytest
@@ -170,7 +170,10 @@ pytest --cov=src/neutron_explorer --cov-report=html
 This project follows PEP 8 guidelines. To check code style:
 
 ```bash
-pip install ruff
+# Install project + development dependencies
+pip install -e ".[dev]"
+
+# Run style checks
 ruff check .
 ```
 
