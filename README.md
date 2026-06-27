@@ -2,6 +2,8 @@
 
 A public, machine learning demonstration using synthetic neutron time-of-flight (TOF) data. This project showcases data analysis techniques including Principal Component Analysis (PCA), k-means clustering, and detector correlations for neutron scattering experiments.
 
+🌐 **Live Demo**: [https://garethcmurphy.github.io/neutron/](https://garethcmurphy.github.io/neutron/)
+
 ![pca](pca_kmeans.png)
 
 ## Overview
@@ -126,10 +128,16 @@ neutron/
 │       ├── pipeline.py                # Main analysis pipeline
 │       ├── synth.py                   # Synthetic data generation
 │       └── plotting.py                # Visualization utilities
-└── tests/                             # Unit tests
-    ├── test_synth.py                  # Tests for data generation
-    ├── test_plotting.py               # Tests for plotting
-    └── test_pipeline.py               # Tests for pipeline
+├── tests/                             # Unit tests
+│   ├── test_synth.py                  # Tests for data generation
+│   ├── test_plotting.py               # Tests for plotting
+│   └── test_pipeline.py               # Tests for pipeline
+└── demo/                              # React GitHub Pages demo
+    ├── src/                           # React source files
+    ├── public/                        # Static assets
+    ├── index.html                     # HTML entry point
+    ├── package.json                   # Node dependencies
+    └── vite.config.js                 # Vite build configuration
 ```
 
 ## Requirements

@@ -58,3 +58,7 @@ outputs/
 
 # Distribution / packaging
 *.whl
+
+# React / Node
+demo/node_modules/
+demo/dist/
